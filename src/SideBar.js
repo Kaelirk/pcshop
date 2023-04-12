@@ -1,29 +1,39 @@
-import {FaPlug, FaFire, FaSave, FaMicrochip, FaRecycle, FaImage} from "react-icons/fa";
+import {FaPlug, FaFire, FaSave, FaMicrochip, FaRecycle, FaImage, FaHome} from "react-icons/fa";
+
 
 const SideBar = () => {
     return (
-        <div className="fixed top-0 left-0 h-screen w-20 m-0
+        <div className="relative top-0 left-0 h-screen w-20 m-0
                         flex flex-col
-                        bg-gray-900 text-white shadow-lg">
+                        bg-gray-900 text-white shadow-">
 
-          <SideBarIcon icon={<FaPlug size ="30" />} />
-          <SideBarIcon icon={<FaFire size ="30" />} />
-          <SideBarIcon icon={<FaSave size ="30" />} />
-          <SideBarIcon icon={<FaMicrochip size ="30" />} />
-          <SideBarIcon icon={<FaRecycle size ="30" />} />
-          <SideBarIcon icon={<FaImage size ="30" />} />
+          <SideBarIcon icon={<FaHome size ="30" />} text={"Home Page"} tabName={"home"}/>
+          <Spacer />
+          <SideBarIcon icon={<FaPlug size ="30" />} text={"PSUs"} tabName={"psu"}/>
+          <SideBarIcon icon={<FaFire size ="30" />} text={"MoBos"} tabName={"mobo"}/>
+          <SideBarIcon icon={<FaMicrochip size ="30" />} text={"CPUs"} tabName={"cpu"}/>
+          <SideBarIcon icon={<FaRecycle size ="30" />} text={"RAM"} tabName={"ram"}/>
+          <SideBarIcon icon={<FaImage size ="30" />} text={"GPUs"} tabName={"gpu"}/>
+          <SideBarIcon icon={<FaSave size ="30" />} text={"HDDs & SSDs"} tabName={"hddssd"}/>
+
         </div>
     );
 };
-
-const SideBarIcon = ({ icon, text = 'Tooltip 💡' }) => (
-    <div className="sidebar-icon group">
+/*The on click had to be passed instead of called, which is why it became onClick={()=> changeTab(text)}
+instead of onclick={changeTab(text)}*/
+const SideBarIcon = ({ icon, text, tabName, isActive}) => (
+    <b className="sidebar-icon group" onClick={()=> changeTab(text)}>
         {icon}
-
-        <span class="sidebar-tooltip group-hover:scale-100">
+        <span className="sidebar-tooltip group-hover:scale-100 select-none">
             {text}
         </span>
-    </div>
+    </b>
 );
+
+const Spacer = () => <hr className="sidebar-hr h-5" />;
+
+function changeTab (tabName) {
+    console.log(tabName)
+}
 
 export default SideBar;
